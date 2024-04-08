@@ -13,10 +13,15 @@ public class InputFoodController {
         this.inputfoodService = inputfoodService;
     }
 
+//    public ResponseEntity<InputFood> addFood(@RequestBody InputFood inputFood) {
+//public ResponseEntity<String> addFood(@RequestBody InputFood inputFood) {
+
+
     @PostMapping("food/addNewFood")
     public ResponseEntity<InputFood> addFood(@RequestBody InputFood inputFood) {
-        System.out.println(inputFood);
         InputFood addedFood = inputfoodService.addFood(inputFood);
+//        return ResponseEntity.ok(addedFood);
+//        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
         return ResponseEntity.ok(addedFood);
     }
 
