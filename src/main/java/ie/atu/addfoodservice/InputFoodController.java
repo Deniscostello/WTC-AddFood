@@ -17,11 +17,15 @@ public class InputFoodController {
 //public ResponseEntity<String> addFood(@RequestBody InputFood inputFood) {
 
 
-    @PostMapping("food/addNewFood")
-    public ResponseEntity<InputFood> addFood(@RequestBody InputFood inputFood) {
-        InputFood addedFood = inputfoodService.addFood(inputFood);
+//    @PostMapping("food/addNewFood")
+//    public ResponseEntity<InputFood> addFood(@RequestBody InputFood inputFood) {
+//        InputFood addedFood = inputfoodService.addFood(inputFood);
 //        return ResponseEntity.ok(addedFood);
-//        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+//    }
+
+    @PostMapping("food/addNewRecipeId")
+    public ResponseEntity<InputFood> addRecipeId(@RequestBody InputFood inputFood) {
+        InputFood addedFood = inputfoodService.addRecipe(inputFood);
         return ResponseEntity.ok(addedFood);
     }
 
