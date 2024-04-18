@@ -37,6 +37,17 @@ public class InputFoodService {
 //        return foodRepository.save(inputFood);
 //    }
 
+    public InputFood addFood(InputFood inputFood) {
+        InputFood user = foodRepository.findByUserId(inputFood.getUserId());
+        System.out.println(foodRepository.findByUserId(inputFood.getUserId()));
+        user.setFoodName(inputFood.getFoodName());
+        List<String> userFoods = user.getFoods();
+        userFoods.add(inputFood.getFoodName());
+        user.setFoods(userFoods);
+        foodRepository.save(user);
+        return inputFood;
+    }
+
 
     public InputFood addRecipe(InputFood inputFood) {
         InputFood userFood = foodRepository.findByUserId(inputFood.getUserId());
@@ -47,20 +58,5 @@ public class InputFoodService {
         userFood.setRecipeSaved(favRecipes);
         foodRepository.save(userFood);
         return inputFood;
-//        if(userFood.isPresent()){
-//            InputFood food = userFood.get();
-//            List<Integer> recipeList = food.getRecipeSaved();
-//            if (recipeList!= null) {
-//                recipeList.add(inputFood.getRecipeId());
-//                inputFood.setRecipeSaved(recipeList);
-//            }
-//            else {
-//                List<Integer> newRecipeList = new ArrayList<>();
-//                String firstRecipe = food.getRecipeId();
-//                newRecipeList.add(firstRecipe);
-//                newRecipeList.add
-//                newfoodList.add(inputFood.getFoodName());
-//                inputFood.setFoods(newfoodList);
-//            }
     }
 }
