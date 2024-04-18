@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface FoodRepository extends MongoRepository<InputFood, ObjectId> {
-    InputFood findByUserId(String userId);
+public interface FoodRepository extends MongoRepository<InputFood, String> {
+    Optional<InputFood> findByUserId(String userId);
 }
