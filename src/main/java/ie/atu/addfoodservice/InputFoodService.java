@@ -16,24 +16,79 @@ public class InputFoodService {
 
     public InputFood addFood(InputFood inputFood) {
         Optional<InputFood> existingFood = foodRepository.findByUserId(inputFood.getUserId());
-        System.out.println(existingFood);
 
-        if(existingFood.isPresent()){
+        if (existingFood.isPresent()) {
             InputFood food = existingFood.get();
             List<String> foodList = food.getFoods();
-            if (foodList!= null) {
+            if (foodList != null) {
                 foodList.add(inputFood.getFoodName());
-                inputFood.setFoods(foodList);
+                food.setFoods(foodList);
+            } else {
+                List<String> newfoodList = new ArrayList<>();
+                newfoodList.add(inputFood.getFoodName());
+                food.setFoods(newfoodList);
+            }
+            return foodRepository.save(food);
+
+        }
+        return inputFood;
+    }
+
+
+    public InputFood addRecipe(InputFood inputFood) {
+        Optional<InputFood> existingFood = foodRepository.findByUserId(inputFood.getUserId());
+
+        if (existingFood.isPresent()) {
+            InputFood food = existingFood.get();
+            List<Integer> recipeList = food.getRecipeSaved();
+            if (recipeList != null){
+                recipeList.add(inputFood.getRecipeId());
+                food.setRecipeSaved(recipeList);
             }
             else {
-                List<String> newfoodList = new ArrayList<>();
-                String firstFood = food.getFoodName();
-                newfoodList.add(firstFood);
-                newfoodList.add(inputFood.getFoodName());
-                inputFood.setFoods(newfoodList);
+                List<Integer> newrecipeList = new ArrayList<>();
+                newrecipeList.add(inputFood.getRecipeId());
+                food.setRecipeSaved(newrecipeList);
             }
+            return foodRepository.save(food);
         }
-
-        return foodRepository.save(inputFood);
+        return inputFood;
     }
+
+
+
+
+//    public InputFood addRecipe(InputFood inputFood) {
+//        Optional<InputFood> existingFood = foodRepository.findByUserId(inputFood.getUserId());
+//        if (existingFood.isPresent()) {
+//            InputFood userFood = existingFood.get();
+//            System.out.println(foodRepository.findByUserId(inputFood.getUserId()));
+//            userFood.setRecipeId(inputFood.getRecipeId());
+//            List<Integer> favRecipes = userFood.getRecipeSaved();
+//            favRecipes.add(inputFood.getRecipeId());
+//            userFood.setRecipeSaved(favRecipes);
+//            foodRepository.save(userFood);
+//
+//        }
+//        return inputFood;
+//    }
+
+//    public InputFood addRecipe(InputFood inputFood) {
+//        Optional<InputFood> existingFood = foodRepository.findByUserId(inputFood.getUserId());
+//        if (existingFood.isPresent()) {
+//            InputFood food = existingFood.get();
+//            List<Integer> favRecipes = food.getRecipeSaved();
+//            if (favRecipes != null) {
+//                favRecipes.add(inputFood.getRecipeId());
+//                inputFood.setRecipeSaved(favRecipes);
+//            } else {
+//                List<Integer> newFavList = new ArrayList<>();
+//                newFavList.add(food.getRecipeId());
+//                inputFood.setRecipeSaved(newFavList);
+//                return foodRepository.save(inputFood);
+//            }
+//            return foodRepository.save(inputFood);
+//        }
+//        return null;
+//    }
 }

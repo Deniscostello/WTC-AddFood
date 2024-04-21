@@ -25,6 +25,10 @@ public class InputFood {
 
     @Id
     private String userId;
+
+    private int recipeId;
+
+    private List<Integer> recipeSaved;
 }
 
 
