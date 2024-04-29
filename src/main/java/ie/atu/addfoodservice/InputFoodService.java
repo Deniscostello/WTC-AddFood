@@ -29,7 +29,6 @@ public class InputFoodService {
                 food.setFoods(newfoodList);
             }
             return foodRepository.save(food);
-
         }
         return inputFood;
     }
